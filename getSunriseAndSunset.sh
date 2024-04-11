@@ -8,6 +8,7 @@
 # go to https://sunrise-sunset.org/api for use details
 
 # Local coordinates. Change it at your zone
+# Find local coordinates at https://www.geolocation.com/
 lat="-34.603722"
 lng="-58.381592"
 
