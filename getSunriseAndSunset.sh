@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This script queries the API and generates a JSON with the current 
+# This script queries the API and generates a JSON with the current
 # sunrise and sunset times in timestamp format, in local time
 # You should add this script to cron so that it runs every day
 
@@ -9,8 +9,8 @@
 
 # Local coordinates. Change it at your zone
 # Find local coordinates at https://www.geolocation.com/
-lat="-34.603722"
-lng="-58.381592"
+lat="123.0"
+lng="123.0"
 
 # API URL
 url="https://api.sunrise-sunset.org/json?lat=$lat&lng=$lng"

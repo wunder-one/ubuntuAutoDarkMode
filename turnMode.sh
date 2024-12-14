@@ -18,22 +18,25 @@ now=$(date +%H:%M)
 if [[ "$now" > "$sunrise" ]] && [[ "$now" < "$sunset" ]]; then
   theme2Stablish='Yaru-light'
   colorScheme='prefer-light'
+  nightLight='false'
 else
   theme2Stablish='Yaru-dark'
   colorScheme='prefer-dark'
+  nightLight='true'
 fi
 
 # Apply theme
-theme=$(gsettings get org.gnome.desktop.interface gtk-theme)
-if [ "$theme" != "$theme2Stablish" ];
+scheme=$(gsettings get org.gnome.desktop.interface color-scheme)
+if [ "$scheme" != "$colorScheme" ];
 then
-  # gsettings needs this environment variable to work. If the command 
+  # gsettings needs this environment variable to work. If the command
   # is executed manually, the system already has it configured.
   # But when it is run from cron it does not find it.
   # For more information read https://www.baeldung.com/linux/gsettings-remote-shell
   PID=$(pgrep -o gnome-shell)
   export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
-	
-  gsettings set org.gnome.desktop.interface gtk-theme $theme2Stablish
-	gsettings set org.gnome.desktop.interface color-scheme $colorScheme
+
+  # gsettings set org.gnome.desktop.interface gtk-theme $theme2Stablish
+  gsettings set org.gnome.desktop.interface color-scheme $colorScheme
+  gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled $nightLight
 fi
